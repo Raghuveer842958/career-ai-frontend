@@ -25,40 +25,72 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
+          {/* Dashboard */}
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+
+          {/* Interview Module */}
+          <Route
+            path="/interview/setup"
+            element={<InterviewSetup />}
+          />
+
+          <Route
+            path="/interview/session"
+            element={<InterviewSession />}
+          />
+
+          <Route
+            path="/interview/report"
+            element={<InterviewReport />}
+          />
+
+          <Route
+            path="/interview/history"
+            element={<InterviewHistory />}
+          />
+
+          <Route
+            path="/interview/history/:id"
+            element={<InterviewDetails />}
+          />
+
+
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-
             {/* Dashboard */}
-            <Route
+            {/* <Route
               path="/dashboard"
               element={<Dashboard />}
-            />
+            /> */}
 
             {/* Interview Module */}
-            <Route
+            {/* <Route
               path="/interview/setup"
               element={<InterviewSetup />}
-            />
+            /> */}
 
-            <Route
+            {/* <Route
               path="/interview/session"
               element={<InterviewSession />}
-            />
+            /> */}
 
-            <Route
+            {/* <Route
               path="/interview/report"
               element={<InterviewReport />}
-            />
+            /> */}
 
-            <Route
+            {/* <Route
               path="/interview/history"
               element={<InterviewHistory />}
-            />
+            /> */}
 
-            <Route
+            {/* <Route
               path="/interview/history/:id"
               element={<InterviewDetails />}
-            />
+            /> */}
 
           </Route>
 
