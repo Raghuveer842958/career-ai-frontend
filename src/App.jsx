@@ -12,8 +12,12 @@ import InterviewSession from "./pages/interview/InterviewSession";
 import InterviewReport from "./pages/interview/InterviewReport";
 import InterviewHistory from "./pages/interview/InterviewHistory";
 import InterviewDetails from "./pages/interview/InterviewDetails";
+import Home from "./pages/Home";
+import Jobs from "./pages/jobs/Jobs";
+import JobDetails from "./pages/jobs/JobDetails";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 export default function App() {
   return (
@@ -29,6 +33,31 @@ export default function App() {
           <Route
             path="/dashboard"
             element={<Dashboard />}
+          />
+
+          {/* <Route
+            path="/jobs"
+            element={<Home />}
+          /> */}
+
+          <Route
+            path="/jobs"
+            element={<Jobs />}
+          />
+
+          <Route
+            path="/jobs/:id"
+            element={<JobDetails />}
+          />
+
+          <Route
+            path="/resume-analysis"
+            element={<Home />}
+          />
+
+          <Route
+            path="/resume-analysis"
+            element={<Home />}
           />
 
           {/* Interview Module */}

@@ -27,12 +27,6 @@ export default function Dashboard() {
                 "Ask CareerAI anything about your resume, skills, roadmap or career.",
             link: "/interview/history",
         },
-        {
-            title: "Career Chat",
-            description:
-                "Ask CareerAI anything about your resume, skills, roadmap or career.",
-            link: "/chat",
-        },
     ];
 
     return (

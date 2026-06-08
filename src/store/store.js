@@ -6,6 +6,7 @@ import { authApi } from "./api/authApi";
 import { interviewApi } from "./api/interviewApi";
 import { voiceApi } from "./api/voiceApi";
 import { interviewHistoryApi } from "./api/interviewHistoryApi";
+import { jobsApi } from "./api/jobsApi";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,9 @@ export const store = configureStore({
 
     [interviewHistoryApi.reducerPath]:
       interviewHistoryApi.reducer,
+
+    [jobsApi.reducerPath]:
+      jobsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -30,4 +34,5 @@ export const store = configureStore({
       .concat(interviewApi.middleware)
       .concat(voiceApi.middleware)
       .concat(interviewHistoryApi.middleware)
+      .concat(jobsApi.middleware),
 });
