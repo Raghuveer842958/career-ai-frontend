@@ -1,113 +1,225 @@
-import { useNavigate }
-    from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function JobCard({ job }) {
 
     const navigate = useNavigate();
 
+    const matchScore =
+        Math.floor(
+            Math.random() * 15
+        ) + 80;
+
     return (
+
         <div
-            onClick={() => {
-                console.log("navigating with:", job);
+            onClick={() =>
                 navigate(`/jobs/${job.id}`)
             }
-            }
             className="
-    cursor-pointer
-    bg-[#161616]
-    border border-[#242424]
-    rounded-2xl
-    p-6
-    hover:border-amber-300/40
-    hover:-translate-y-1
-    hover:shadow-lg
-    hover:shadow-amber-300/5
-    transition-all
-    duration-300
-    flex gap-5
-"
+                cursor-pointer
+                rounded-3xl
+                border
+                p-6
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:shadow-xl
+            "
+            style={{
+                background:
+                    "var(--surface)",
+
+                borderColor:
+                    "var(--border)",
+            }}
         >
 
-            <img
-                src={job.employer_logo}
-                alt={job.company}
-                className="
-        w-20
-        h-20
-        rounded-2xl
-        bg-white
-        p-2
-        object-contain
-        shrink-0
-    "
-            />
+            {/* Header */}
 
-            <div className="flex-1">
+            <div className="
+                flex
+                justify-between
+                items-start
+                gap-4
+            ">
 
-                <h3 className="text-xl text-white">
-                    {job.title}
-                </h3>
+                <div className="
+                    flex
+                    gap-4
+                ">
 
-                <p className="text-[#aaa]">
-                    {job.company}
+                    <img
+                        src={job.employer_logo}
+                        alt={job.company}
+                        className="
+                            w-16
+                            h-16
+                            rounded-2xl
+                            bg-white
+                            object-contain
+                            p-2
+                        "
+                    />
 
-                    <div className="mt-3">
+                    <div>
 
-                        <span className="
-        px-3 py-1
-        rounded-full
-        text-xs
-        bg-blue-500/10
-        text-blue-400
-    ">
-                            Match Score 84%
-                        </span>
+                        <h3 className="
+                            text-xl
+                            font-semibold
+                            mb-1
+                        ">
+                            {job.title}
+                        </h3>
+
+                        <p
+                            className="
+                                text-sm
+                            "
+                            style={{
+                                color:
+                                    "var(--secondary)"
+                            }}
+                        >
+                            {job.company}
+                        </p>
 
                     </div>
-                </p>
-
-                <div className="flex gap-4 mt-2 text-sm text-[#777]">
-
-                    <span>
-                        📍 {job.location}
-                    </span>
-
-                    <span>
-                        💼 {job.job_employment_type}
-                    </span>
 
                 </div>
 
-                <div className="mt-3 flex items-center gap-3">
-
-                    <span
-                        className="
-                        px-3 py-1
+                <div
+                    className="
+                        px-3
+                        py-1.5
                         rounded-full
                         text-xs
-                        bg-amber-300/10
-                        text-amber-300
+                        font-medium
                     "
-                    >
-                        {job.job_publisher}
-                    </span>
+                    style={{
+                        background:
+                            "rgba(34,197,94,.1)",
+
+                        color:
+                            "#22c55e",
+                    }}
+                >
+                    {matchScore}% Match
+                </div>
+
+            </div>
+
+            {/* Meta */}
+
+            <div className="
+                flex
+                flex-wrap
+                gap-4
+                mt-5
+                text-sm
+            ">
+
+                <span>
+                    📍 {job.location}
+                </span>
+
+                <span>
+                    💼 {job.job_employment_type}
+                </span>
+
+                <span>
+                    🌎 Remote Friendly
+                </span>
+
+            </div>
+
+            {/* Skills */}
+
+            <div className="
+                flex
+                flex-wrap
+                gap-2
+                mt-5
+            ">
+
+                {[
+                    "FastAPI",
+                    "MongoDB",
+                    "React",
+                    "AI"
+                ].map((skill) => (
 
                     <span
+                        key={skill}
                         className="
-                        px-3 py-1
-                        rounded-full
-                        text-xs
-                        bg-green-500/10
-                        text-green-400
-                    "
+                            px-3
+                            py-1
+                            rounded-full
+                            text-xs
+                        "
+                        style={{
+                            background:
+                                "var(--bg)",
+
+                            border:
+                                "1px solid var(--border)",
+                        }}
                     >
-                        Saved
+                        {skill}
                     </span>
 
+                ))}
+
+            </div>
+
+            {/* Footer */}
+
+            <div
+                className="
+                    flex
+                    justify-between
+                    items-center
+                    mt-6
+                    pt-5
+                    border-t
+                "
+                style={{
+                    borderColor:
+                        "var(--border)"
+                }}
+            >
+
+                <span
+                    className="
+                        text-sm
+                    "
+                    style={{
+                        color:
+                            "var(--secondary)"
+                    }}
+                >
+                    via {job.job_publisher}
+                </span>
+
+                <div
+                    className="
+                        flex
+                        items-center
+                        gap-2
+                        text-sm
+                        font-medium
+                    "
+                    style={{
+                        color:
+                            "var(--accent)"
+                    }}
+                >
+                    View Details →
                 </div>
 
             </div>
 
         </div>
+
     );
+
 }
