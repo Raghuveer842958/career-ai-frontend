@@ -1,29 +1,231 @@
-import { Link } from "react-router-dom";
+
+import {
+  useTheme,
+}
+  from "../context/ThemeContext";
+
+import {
+  Link,
+} from "react-router-dom";
+
+import useScrollSpy
+  from "../hooks/useScrollSpy";
 
 export default function Navbar() {
-  return (
-    <header className="border-b border-[#242424] bg-[#0f0f0f] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
-        <Link to="/dashboard">
-          <h1 className="font-serif text-2xl text-amber-300 tracking-tight">
-            CareerAI
-          </h1>
+  const {
+    theme,
+    toggleTheme,
+  } = useTheme();
+
+  const sections = [
+    {
+      id: "home",
+      label: "Home",
+    },
+    {
+      id: "resume",
+      label: "Resume",
+    },
+    {
+      id: "jobs",
+      label: "Jobs",
+    },
+    {
+      id: "interview",
+      label: "Interview",
+    },
+    {
+      id: "history",
+      label: "History",
+    },
+    {
+      id: "optimizer",
+      label: "Optimizer",
+    },
+  ];
+
+  const activeSection =
+    useScrollSpy(
+      sections.map(
+        section => section.id
+      )
+    );
+
+  const scrollToSection =
+    (id) => {
+
+      document
+        .getElementById(id)
+        ?.scrollIntoView({
+          behavior: "smooth",
+        });
+
+    };
+
+  return (
+
+    <header
+      className="
+                sticky
+                top-0
+                z-50
+                backdrop-blur-xl
+                border-b
+            "
+      style={{
+        background:
+          "var(--bg)",
+        borderColor:
+          "var(--border)",
+      }}
+    >
+
+      <div
+        className="
+                    max-w-7xl
+                    mx-auto
+                    px-6
+                    h-16
+                    flex
+                    items-center
+                    justify-between
+                "
+      >
+
+        {/* Logo */}
+
+        <Link
+          to="/"
+          className="
+                        text-xl
+                        font-semibold
+                    "
+        >
+
+          Career
+          <span
+            style={{
+              color:
+                "var(--accent)"
+            }}
+          >
+            AI
+          </span>
+
         </Link>
 
-        <div className="flex items-center gap-8">
+        {/* Navigation */}
+
+        <nav
+          className="
+                        hidden
+                        md:flex
+                        items-center
+                        gap-2
+                    "
+        >
+
+          {
+            sections.map((section) => (
+
+              <button
+                key={section.id}
+                onClick={() =>
+                  scrollToSection(
+                    section.id
+                  )
+                }
+                className="
+        px-4
+        py-2
+        rounded-lg
+        text-sm
+        transition-all
+      "
+                style={{
+                  color:
+                    activeSection === section.id
+                      ? "#ffffff"
+                      : "var(--text)",
+
+                  background:
+                    activeSection === section.id
+                      ? "var(--accent)"
+                      : "transparent",
+                }}
+              >
+
+                {section.label}
+
+              </button>
+
+            ))
+          }
+
+        </nav>
+
+        {/* Right Side */}
+
+        <div
+          className="
+                        flex
+                        items-center
+                        gap-3
+                    "
+        >
+
+          <button
+            onClick={
+              toggleTheme
+            }
+            className="
+                            w-10
+                            h-10
+                            rounded-full
+                            border
+                            flex
+                            items-center
+                            justify-center
+                        "
+            style={{
+              borderColor:
+                "var(--border)",
+            }}
+          >
+
+            {
+              theme ===
+                "dark"
+                ? "☀️"
+                : "🌙"
+            }
+
+          </button>
+
           <Link
             to="/profile"
-            className="text-sm text-[#777] hover:text-amber-300 transition-colors"
+            className="
+                            px-4
+                            py-2
+                            rounded-lg
+                            border
+                        "
+            style={{
+              borderColor:
+                "var(--border)",
+            }}
           >
+
             Profile
+
           </Link>
 
-          <button className="px-4 py-2 rounded-lg bg-[#161616] border border-[#242424] text-[#ccc] hover:border-amber-300/40 hover:text-amber-300 transition-all">
-            Logout
-          </button>
         </div>
+
       </div>
+
     </header>
+
   );
 }
