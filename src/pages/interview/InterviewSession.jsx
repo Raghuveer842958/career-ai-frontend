@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import VoiceControls from "../../components/interview/VoiceControls";
 import { useSubmitAnswerMutation } from "../../store/api/interviewApi";
 import { useTranscribeAudioMutation } from "../../store/api/voiceApi";
+import Navbar from "../../components/Navbar";
 
 export default function InterviewSession() {
 
@@ -246,6 +247,8 @@ export default function InterviewSession() {
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f0ede8]">
+
+      <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 py-10">
 
