@@ -1,150 +1,452 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 import { useLoginMutation } from "../store/api/authApi";
 import { setCredentials } from "../store/slices/authSlice";
 
+import careerAgent from "../assets/mock-interview1.svg";
+
+// import careerAgent from "../assets/job-search.svg";
+
 export default function Login() {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const [errors, setErrors] = useState({});
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [
+    login,
+    { isLoading }
+  ] = useLoginMutation();
 
   const validate = () => {
+
     const errs = {};
-    if (!formData.email) errs.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) errs.email = "Invalid email";
-    if (!formData.password) errs.password = "Password is required";
+
+    if (!formData.email) {
+      errs.email =
+        "Email is required";
+    }
+
+    else if (
+      !/\S+@\S+\.\S+/.test(
+        formData.email
+      )
+    ) {
+      errs.email =
+        "Invalid email";
+    }
+
+    if (!formData.password) {
+      errs.password =
+        "Password is required";
+    }
+
     return errs;
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+
+    const {
+      name,
+      value,
+    } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (errors[name]) {
+
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+
+    }
+
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length) return setErrors(errs);
+
+    const errs =
+      validate();
+
+    if (
+      Object.keys(errs)
+        .length
+    ) {
+      return setErrors(errs);
+    }
 
     try {
-      const result = await login(formData).unwrap();
-      dispatch(setCredentials(result));
-      navigate("/dashboard");
-    } catch (err) {
+
+      const result =
+        await login(
+          formData
+        ).unwrap();
+
+      dispatch(
+        setCredentials(
+          result
+        )
+      );
+
+      navigate(
+        "/dashboard"
+      );
+
+    }
+
+    catch (err) {
+
       setErrors({
         general:
-          err?.data?.detail || "Invalid credentials. Please try again.",
+          err?.data?.detail ||
+          "Invalid credentials. Please try again.",
       });
+
     }
+
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
 
-        {/* Logo */}
-        <div className="mb-10">
-          <h1 className="font-serif text-2xl text-amber-300 tracking-tight">
+    <div
+      className="
+            h-screen
+            overflow-hidden
+            grid
+            lg:grid-cols-2
+        "
+      style={{
+        background: "var(--bg)",
+        color: "var(--text)"
+      }}
+    >
+
+      {/* Left Side */}
+
+      <div
+        className="
+                hidden
+                lg:flex
+                flex-col
+                justify-center
+                items-center
+                px-16
+            "
+        style={{
+          background: "var(--surface)"
+        }}
+      >
+
+        <div className="max-w-lg">
+
+          <h1
+            className="
+                        text-6xl
+                        font-bold
+                        mb-4
+                    "
+          >
             CareerAI
           </h1>
+
+          <p
+            className="
+                        text-xl
+                        leading-9
+                        mb-12
+                    "
+            style={{
+              color:
+                "var(--secondary)"
+            }}
+          >
+            AI-powered career growth platform
+            designed to help you analyze resumes,
+            discover jobs, prepare
+            for interviews.
+          </p>
+
+          <img
+            src={careerAgent}
+            alt="CareerAI"
+            className="
+                        w-[420px]
+                        mx-auto
+                    "
+          />
+
         </div>
 
-        {/* Card */}
-        <div className="bg-[#161616] border border-[#242424] rounded-xl px-8 py-10">
-          <h2 className="text-2xl font-light text-[#f0ede8] mb-1 tracking-tight">
-            Welcome back
-          </h2>
-          <p className="text-sm text-[#666] mb-8">Sign in to your account</p>
+      </div>
 
-          {errors.general && (
-            <div className="mb-6 px-4 py-3 rounded-lg bg-red-900/20 border border-red-800/40 text-red-400 text-sm">
-              {errors.general}
-            </div>
-          )}
+      {/* Right Side */}
 
-          <form onSubmit={handleSubmit} noValidate>
-            <div className="mb-4">
-              <label className="block text-[10px] tracking-widest uppercase text-[#666] mb-2">
-                Email address
-              </label>
+      <div
+        className="
+                flex
+                items-center
+                justify-center
+                px-6
+            "
+      >
+
+        <div
+          className="
+                    w-full
+                    max-w-md
+                    p-10
+                    rounded-[32px]
+                "
+          style={{
+            background:
+              "var(--surface)",
+            border:
+              "1px solid var(--border)"
+          }}
+        >
+
+          <div className="mb-8">
+
+            <h2
+              className="
+                            text-4xl
+                            font-semibold
+                            mb-3
+                        "
+            >
+              Welcome Back
+            </h2>
+
+            <p
+              style={{
+                color:
+                  "var(--secondary)"
+              }}
+            >
+              Sign in to continue your
+              CareerAI journey.
+            </p>
+
+          </div>
+
+          {
+            errors.general && (
+
+              <div
+                className="
+                                mb-6
+                                p-4
+                                rounded-xl
+                            "
+                style={{
+                  background:
+                    "rgba(239,68,68,.08)",
+                  border:
+                    "1px solid rgba(239,68,68,.2)",
+                  color:
+                    "#ef4444"
+                }}
+              >
+                {errors.general}
+              </div>
+
+            )
+          }
+
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
+
+            <div>
+
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="you@example.com"
-                className={`w-full bg-[#1c1c1c] border rounded-lg px-4 py-3 text-sm text-[#ccc] placeholder-[#444] outline-none transition-colors
-                  ${errors.email
-                    ? "border-red-800/60 focus:border-red-700"
-                    : "border-[#2e2e2e] focus:border-amber-700/50"
-                  }`}
+                placeholder="Email Address"
+                className="
+                                w-full
+                                p-4
+                                rounded-2xl
+                                outline-none
+                            "
+                style={{
+                  background:
+                    "var(--bg)",
+                  border:
+                    "1px solid var(--border)"
+                }}
               />
-              {errors.email && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
-              )}
+
+              {
+                errors.email && (
+
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.email}
+                  </p>
+
+                )
+              }
+
             </div>
 
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <label className="block text-[10px] tracking-widest uppercase text-[#666]">
-                  Password
-                </label>
-                <Link
-                  to="/forgot-password"
-                  className="text-xs text-[#555] hover:text-amber-300 transition-colors"
-                >
-                  Forgot?
-                </Link>
-              </div>
+            <div>
+
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="••••••••"
-                className={`w-full bg-[#1c1c1c] border rounded-lg px-4 py-3 text-sm text-[#ccc] placeholder-[#444] outline-none transition-colors
-                  ${errors.password
-                    ? "border-red-800/60 focus:border-red-700"
-                    : "border-[#2e2e2e] focus:border-amber-700/50"
-                  }`}
+                placeholder="Password"
+                className="
+                                w-full
+                                p-4
+                                rounded-2xl
+                                outline-none
+                            "
+                style={{
+                  background:
+                    "var(--bg)",
+                  border:
+                    "1px solid var(--border)"
+                }}
               />
-              {errors.password && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.password}</p>
-              )}
+
+              {
+                errors.password && (
+
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.password}
+                  </p>
+
+                )
+              }
+
+            </div>
+
+            <div className="flex justify-end">
+
+              <Link
+                to="/forgot-password"
+                className="text-sm"
+                style={{
+                  color:
+                    "var(--secondary)"
+                }}
+              >
+                Forgot Password?
+              </Link>
+
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-amber-300 hover:bg-amber-200 disabled:opacity-50 disabled:cursor-not-allowed text-[#0f0f0f] font-medium text-sm py-3 rounded-lg transition-colors"
+              className="
+                            w-full
+                            py-4
+                            rounded-2xl
+                            text-white
+                            font-medium
+                            transition-all
+                        "
+              style={{
+                background:
+                  "var(--accent)"
+              }}
             >
-              {isLoading ? "Signing in…" : "Sign in"}
+              {
+                isLoading
+                  ? "Signing In..."
+                  : "Sign In"
+              }
             </button>
+
           </form>
 
-          <div className="flex items-center gap-3 my-6">
-            <div className="flex-1 h-px bg-[#242424]" />
-            <span className="text-xs text-[#444]">or</span>
-            <div className="flex-1 h-px bg-[#242424]" />
+          <div
+            className="
+                        flex
+                        items-center
+                        gap-3
+                        my-8
+                    "
+          >
+
+            <div
+              className="flex-1 h-px"
+              style={{
+                background:
+                  "var(--border)"
+              }}
+            />
+
+            <span
+              className="text-sm"
+              style={{
+                color:
+                  "var(--secondary)"
+              }}
+            >
+              OR
+            </span>
+
+            <div
+              className="flex-1 h-px"
+              style={{
+                background:
+                  "var(--border)"
+              }}
+            />
+
           </div>
 
-          <p className="text-center text-sm text-[#555]">
-            No account?{" "}
+          <p
+            className="
+                        text-center
+                    "
+            style={{
+              color:
+                "var(--secondary)"
+            }}
+          >
+
+            Don't have an account?{" "}
+
             <Link
               to="/signup"
-              className="text-amber-300 hover:text-amber-200 transition-colors"
+              style={{
+                color:
+                  "var(--accent)"
+              }}
             >
-              Create one →
+              Create Account
             </Link>
+
           </p>
+
         </div>
+
       </div>
+
     </div>
+
   );
+
 }

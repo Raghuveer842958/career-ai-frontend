@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/slices/authSlice";
 import { useSignupMutation, useLoginMutation } from "../store/api/authApi";
+import careerAgent from "../assets/mock-interview1.svg";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -74,148 +75,399 @@ export default function Signup() {
   };
 
   const inputClass = (field) =>
-    `w-full bg-[#1c1c1c] border rounded-lg px-4 py-3 text-sm text-[#ccc] placeholder-[#444] outline-none transition-colors ${
-      errors[field]
-        ? "border-red-800/60 focus:border-red-700"
-        : "border-[#2e2e2e] focus:border-amber-700/50"
+    `w-full bg-[#1c1c1c] border rounded-lg px-4 py-3 text-sm text-[#ccc] placeholder-[#444] outline-none transition-colors ${errors[field]
+      ? "border-red-800/60 focus:border-red-700"
+      : "border-[#2e2e2e] focus:border-amber-700/50"
     }`;
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
 
-        {/* Logo */}
-        <div className="mb-10">
-          <h1 className="font-serif text-2xl text-amber-300 tracking-tight">
+    <div
+      className="
+            h-screen
+            overflow-hidden
+            grid
+            lg:grid-cols-2
+        "
+      style={{
+        background: "var(--bg)",
+        color: "var(--text)"
+      }}
+    >
+
+      {/* Left Side */}
+
+      <div
+        className="
+                hidden
+                lg:flex
+                flex-col
+                justify-center
+                items-center
+                px-16
+            "
+        style={{
+          background:
+            "linear-gradient(to bottom right, var(--surface), var(--bg))"
+        }}
+      >
+
+        <div className="max-w-lg">
+
+          <h1
+            className="
+                        text-6xl
+                        font-bold
+                        mb-4
+                    "
+          >
             CareerAI
           </h1>
+
+          <p
+            className="
+                        text-xl
+                        leading-9
+                        mb-12
+                    "
+            style={{
+              color:
+                "var(--secondary)"
+            }}
+          >
+            Create your account and start
+            improving your resume, discovering
+            jobs, and preparing for interviews
+            with AI.
+          </p>
+
+          <img
+            src={careerAgent}
+            alt="CareerAI"
+            className="
+                        w-[420px]
+                        mx-auto
+                    "
+          />
+
         </div>
 
-        {/* Card */}
-        <div className="bg-[#161616] border border-[#242424] rounded-xl px-8 py-10">
-          <h2 className="text-2xl font-light text-[#f0ede8] mb-1 tracking-tight">
-            Get started
-          </h2>
-          <p className="text-sm text-[#666] mb-8">Create your free account</p>
+      </div>
 
-          {errors.general && (
-            <div className="mb-6 px-4 py-3 rounded-lg bg-red-900/20 border border-red-800/40 text-red-400 text-sm">
-              {errors.general}
-            </div>
-          )}
+      {/* Right Side */}
 
-          <form onSubmit={handleSubmit} noValidate>
+      <div
+        className="
+                flex
+                items-center
+                justify-center
+                px-6
+            "
+      >
 
-            {/* Name row */}
-            <div className="flex gap-3 mb-4">
-              <div className="flex-1 min-w-0">
-                <label className="block text-[10px] tracking-widest uppercase text-[#666] mb-2">
-                  First name
-                </label>
+        <div
+          className="
+                    w-full
+                    max-w-lg
+                    p-10
+                    rounded-[32px]
+                "
+          style={{
+            background:
+              "var(--surface)",
+            border:
+              "1px solid var(--border)"
+          }}
+        >
+
+          <div className="mb-8">
+
+            <h2
+              className="
+                            text-4xl
+                            font-semibold
+                            mb-3
+                        "
+            >
+              Create Account
+            </h2>
+
+            <p
+              style={{
+                color:
+                  "var(--secondary)"
+              }}
+            >
+              Start your AI-powered career journey.
+            </p>
+
+          </div>
+
+          {
+            errors.general && (
+
+              <div
+                className="
+                                mb-6
+                                p-4
+                                rounded-xl
+                            "
+                style={{
+                  background:
+                    "rgba(239,68,68,.08)",
+                  border:
+                    "1px solid rgba(239,68,68,.2)",
+                  color:
+                    "#ef4444"
+                }}
+              >
+                {errors.general}
+              </div>
+
+            )
+          }
+
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
+
+            {/* Name Row */}
+
+            <div className="grid grid-cols-2 gap-4">
+
+              <div>
+
                 <input
                   type="text"
                   name="first_name"
                   value={formData.first_name}
                   onChange={handleChange}
-                  placeholder="Jane"
+                  placeholder="First Name"
                   className={inputClass("first_name")}
+                  style={{
+                    background:
+                      "var(--bg)"
+                  }}
                 />
-                {errors.first_name && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.first_name}</p>
-                )}
+
+                {
+                  errors.first_name && (
+
+                    <p className="text-red-500 text-sm mt-2">
+                      {errors.first_name}
+                    </p>
+
+                  )
+                }
+
               </div>
-              <div className="flex-1 min-w-0">
-                <label className="block text-[10px] tracking-widest uppercase text-[#666] mb-2">
-                  Last name
-                </label>
+
+              <div>
+
                 <input
                   type="text"
                   name="last_name"
                   value={formData.last_name}
                   onChange={handleChange}
-                  placeholder="Doe"
+                  placeholder="Last Name"
                   className={inputClass("last_name")}
+                  style={{
+                    background:
+                      "var(--bg)"
+                  }}
                 />
-                {errors.last_name && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.last_name}</p>
-                )}
+
+                {
+                  errors.last_name && (
+
+                    <p className="text-red-500 text-sm mt-2">
+                      {errors.last_name}
+                    </p>
+
+                  )
+                }
+
               </div>
+
             </div>
 
             {/* Email */}
-            <div className="mb-4">
-              <label className="block text-[10px] tracking-widest uppercase text-[#666] mb-2">
-                Email address
-              </label>
+
+            <div>
+
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="you@example.com"
+                placeholder="Email Address"
                 className={inputClass("email")}
+                style={{
+                  background:
+                    "var(--bg)"
+                }}
               />
-              {errors.email && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
-              )}
+
+              {
+                errors.email && (
+
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.email}
+                  </p>
+
+                )
+              }
+
             </div>
 
             {/* Password */}
-            <div className="mb-4">
-              <label className="block text-[10px] tracking-widest uppercase text-[#666] mb-2">
-                Password
-              </label>
+
+            <div>
+
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Min. 8 characters"
+                placeholder="Password"
                 className={inputClass("password")}
+                style={{
+                  background:
+                    "var(--bg)"
+                }}
               />
-              {errors.password && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.password}</p>
-              )}
+
+              {
+                errors.password && (
+
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.password}
+                  </p>
+
+                )
+              }
+
             </div>
 
-            {/* Confirm password */}
-            <div className="mb-6">
-              <label className="block text-[10px] tracking-widest uppercase text-[#666] mb-2">
-                Confirm password
-              </label>
+            {/* Confirm Password */}
+
+            <div>
+
               <input
                 type="password"
                 name="confirm_password"
                 value={formData.confirm_password}
                 onChange={handleChange}
-                placeholder="••••••••"
+                placeholder="Confirm Password"
                 className={inputClass("confirm_password")}
+                style={{
+                  background:
+                    "var(--bg)"
+                }}
               />
-              {errors.confirm_password && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.confirm_password}</p>
-              )}
+
+              {
+                errors.confirm_password && (
+
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.confirm_password}
+                  </p>
+
+                )
+              }
+
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-amber-300 hover:bg-amber-200 disabled:opacity-50 disabled:cursor-not-allowed text-[#0f0f0f] font-medium text-sm py-3 rounded-lg transition-colors"
+              className="
+                            w-full
+                            py-4
+                            rounded-2xl
+                            text-white
+                            font-medium
+                        "
+              style={{
+                background:
+                  "var(--accent)"
+              }}
             >
-              {isLoading ? "Creating account…" : "Create account"}
+
+              {
+                isLoading
+                  ? "Creating Account..."
+                  : "Create Account"
+              }
+
             </button>
+
           </form>
 
-          <p className="text-center text-sm text-[#555] mt-6">
+          <div
+            className="
+                        flex
+                        items-center
+                        gap-3
+                        my-8
+                    "
+          >
+
+            <div
+              className="flex-1 h-px"
+              style={{
+                background:
+                  "var(--border)"
+              }}
+            />
+
+            <span
+              style={{
+                color:
+                  "var(--secondary)"
+              }}
+            >
+              OR
+            </span>
+
+            <div
+              className="flex-1 h-px"
+              style={{
+                background:
+                  "var(--border)"
+              }}
+            />
+
+          </div>
+
+          <p
+            className="text-center"
+            style={{
+              color:
+                "var(--secondary)"
+            }}
+          >
+
             Already have an account?{" "}
+
             <Link
               to="/login"
-              className="text-amber-300 hover:text-amber-200 transition-colors"
+              style={{
+                color:
+                  "var(--accent)"
+              }}
             >
-              Sign in →
+              Sign In
             </Link>
+
           </p>
+
         </div>
+
       </div>
+
     </div>
+
   );
 }

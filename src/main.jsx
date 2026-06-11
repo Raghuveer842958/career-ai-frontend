@@ -14,6 +14,10 @@ createRoot(document.getElementById('root')).render(
 
       <App />
 
+      {/* <div className="w-[95%] mx-auto">
+        <App />
+      </div> */}
+
     </ThemeProvider>
   </StrictMode>,
 )
