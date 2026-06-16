@@ -60,6 +60,11 @@ CareerAI helps job seekers improve their resumes, discover relevant opportunitie
 
 > Replace the image paths with your actual screenshots.
 
+## Login Page
+
+![Landing Page](./screenshots/login.png)
+
+
 ## Landing Page
 
 ![Landing Page](./screenshots/landing.png)
