@@ -58,8 +58,6 @@ CareerAI helps job seekers improve their resumes, discover relevant opportunitie
 
 # 📸 Screenshots
 
-> Replace the image paths with your actual screenshots.
-
 ## Login Page
 
 ![Landing Page](./screenshots/login.png)

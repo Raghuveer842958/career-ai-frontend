@@ -69,7 +69,7 @@ export default function ResumeOptimizerSection() {
                     </ul>
 
                     <Link
-                        to="/resume-optimizer"
+                        to="/resume/optimizer"
                         className="
         inline-flex
         px-6

@@ -19,6 +19,7 @@ import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ResumeAnalysis from "./components/ResumeAnalysis";
 import JobSearchAnalysis from "./components/JobSearchAnslysis";
+import ResumeOptmize from "./pages/resume/ResumeOptmize";
 
 
 
@@ -89,6 +90,11 @@ export default function App() {
           <Route
             path="/interview/history/:id"
             element={<InterviewDetails />}
+          />
+
+          <Route
+            path="/resume/optimizer"
+            element={<ResumeOptmize />}
           />
 
 
