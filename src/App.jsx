@@ -19,7 +19,9 @@ import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ResumeAnalysis from "./components/ResumeAnalysis";
 import JobSearchAnalysis from "./components/JobSearchAnslysis";
-import ResumeOptmize from "./pages/resume/ResumeOptmize";
+import ResumeOptmize from "./pages/resume/ResumeOptimizer";
+import ResumeOptimizerSetup from "./pages/resume/ResumeOptimizerSetup";
+import ResumeOptimizer from "./pages/resume/ResumeOptimizer";
 
 
 
@@ -92,10 +94,18 @@ export default function App() {
             element={<InterviewDetails />}
           />
 
-          <Route
-            path="/resume/optimizer"
+          {/* <Route
+            path="/resume/optimize"
             element={<ResumeOptmize />}
-          />
+          /> */}
+
+          <Route
+            path="/resume-optimizer/setup"
+            element={<ResumeOptimizerSetup />} />
+            
+          <Route
+            path="/resume-optimizer"
+            element={<ResumeOptimizer />} />
 
 
           {/* Protected Routes */}

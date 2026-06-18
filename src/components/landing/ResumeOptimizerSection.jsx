@@ -69,14 +69,8 @@ export default function ResumeOptimizerSection() {
                     </ul>
 
                     <Link
-                        to="/resume/optimizer"
-                        className="
-        inline-flex
-        px-6
-        py-3
-        rounded-xl
-        font-medium
-    "
+                        to="/resume-optimizer/setup"
+                        className=" inline-flex px-6 py-3 rounded-xl font-medium"
                         style={{
                             background:
                                 "var(--accent)",

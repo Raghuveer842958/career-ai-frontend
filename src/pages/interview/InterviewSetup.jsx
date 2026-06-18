@@ -279,7 +279,7 @@
 
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Navbar from "../../components/Navbar";
 
@@ -289,9 +289,13 @@ import {
 
 export default function InterviewSetup() {
 
+  const location = useLocation();
+
+  const { jobDescription } = location.state || {}
+
   const navigate = useNavigate();
 
-  const [jd, setJd] = useState("");
+  const [jd, setJd] = useState(jobDescription);
 
   const [config, setConfig] = useState({
     questions: 10,
